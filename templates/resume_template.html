@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume {{ user.get("name", "Not specified") }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Pacifico', cursive;
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            color: #e91e63;
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        strong {
+            color: #c2185b;
+        }
+        a {
+            color: #e91e63;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .data-container {
+            background-color: rgba(144, 238, 144, 0.5);
+            border: 2px solid #8FBC8F;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resume {{ user.get("name", "Not specified") }}</h1>
+    <div class="data-container">
+        <p><strong>Login:</strong> {{ user.get("login", "Not specified") }}</p>
+        <p><strong>Email:</strong> {{ user.get("email", "Not specified") }}</p>
+        <p><strong>Repositories:</strong> {{ user.get("public_repos", "Not specified") }}</p>
+        <p><strong>Registration date:</strong> {{ user.get("created_at", "Not specified") }}</p>
+
+        {% if user.get("bio") and user.get("bio") != "Not specified" %}
+            <p><strong>Bio:</strong> {{ user.get("bio") }}</p>
+        {% endif %}
+
+    <p><a href="{{ url_for('refresh') }}">Refresh</a></p>
+</body>
+</html>
